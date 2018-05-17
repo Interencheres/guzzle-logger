@@ -10,7 +10,7 @@
         "psr-0": {
             "Interencheres": "src/"
         }
-    }
+    },
     "license": "private",
     "authors": [
         {
