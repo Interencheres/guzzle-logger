@@ -8,6 +8,7 @@
 
 namespace Interencheres;
 
+use \Exception;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
