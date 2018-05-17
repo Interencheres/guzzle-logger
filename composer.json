@@ -1,12 +1,17 @@
 {
-  "name": "interencheres/guzzle-logger",
-  "description": "Guzzle Logger on Json Format",
-  "minimum-stability": "stable",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Gregory Gerard",
-      "email": "wako057@gmail.com"
-    }
-  ]
+    "name": "interencheres/guzzle-logger",
+    "description": "Allow guzzle to log in json format",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/psr7": "^1.4"
+    },
+    "license": "private",
+    "authors": [
+        {
+            "name": "Gregory Gerard",
+            "email": "wako057@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
 }
