@@ -8,11 +8,7 @@
 
 namespace Interencheres;
 
-use Exception;
-use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Psr7;
-use Phalcon\Http\RequestInterface;
-use Phalcon\Http\ResponseInterface;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -43,7 +39,7 @@ use Psr\Http\Message\ResponseInterface;
  * - {req_body}:       Request body
  * - {res_body}:       Response body
  */
-class MessageFormatterJson extends MessageFormatter
+class MessageFormatterJson extends GuzzleHttp\MessageFormatter
 {
     const FULL = '{request}{response}{ts}{date_iso_8601}{date_common_log}{host}{method}{uri}{version}{target}{hostname}{code}{phrase}{error}{req_header_*}{res_header_*}{req_headers}{res_headers}{req_body}{res_body}';
     const CLF = "{hostname} {req_header_User-Agent} - [{date_common_log}] \"{method} {target} HTTP/{version}\" {code} {res_header_Content-Length}";
