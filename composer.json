@@ -3,12 +3,11 @@
     "description": "Allow guzzle to log in json format",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^6.3",
-        "guzzlehttp/psr7": "^1.4"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
-        "psr-0": {
-            "Interencheres": "src/"
+        "psr-4": {
+            "": "src/"
         }
     },
     "license": "private",
