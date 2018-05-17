@@ -1,0 +1,12 @@
+{
+  "name": "interencheres/guzzle-logger",
+  "description": "Guzzle Logger on Json Format",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Gregory Gerard",
+      "email": "wako057@gmail.com"
+    }
+  ]
+}
