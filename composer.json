@@ -1,5 +1,5 @@
 {
-    "name": "interencheres/guzzle-logger",
+    "name": "interencheres/guzzle-logger-json",
     "description": "Allow guzzle to log in json format",
     "type": "library",
     "require": {
