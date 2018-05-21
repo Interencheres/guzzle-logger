@@ -8,7 +8,7 @@ $logger->pushHandler(new StreamHandler('/tmp/guzzle.log', Logger::DEBUG));
 $stack->push(
     Middleware::log(
         $logger,
-        new MessageFormatterJson('{hostname} {host} {method} {uri} {code} {req_body} {target} {error} {req_headers} {res_headers} {res_header_cache-control}')
+        new MessageFormatterJson('{hostname} {dest_host} {dest_method} {dest_uri} {code} {req_body} {target} {error} {req_headers} {res_headers} {res_header_cache-control}')
     )
 );
 
