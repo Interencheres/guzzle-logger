@@ -24,11 +24,11 @@ use Psr\Http\Message\ResponseInterface;
  * - {ts}:             ISO 8601 date in GMT
  * - {date_iso_8601}   ISO 8601 date in GMT
  * - {date_common_log} Apache common log date using the configured timezone.
- * - {host}:           Host of the request
- * - {method}:         Method of the request
- * - {uri}:            URI of the request
- * - {version}:        Protocol version
- * - {target}:         Request target of the request (path + query + fragment)
+ * - {dest_host}:      Host of the request
+ * - {dest_method}:    Method of the request
+ * - {dest_uri}:       URI of the request
+ * - {dest_version}:   Protocol version
+ * - {dest_target}:    Request target of the request (path + query + fragment)
  * - {hostname}:       Hostname of the machine that sent the request
  * - {code}:           Status code of the response (if available)
  * - {phrase}:         Reason phrase of the response  (if available)
@@ -42,18 +42,18 @@ use Psr\Http\Message\ResponseInterface;
  */
 class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
 {
-    const FULL = '{request}{response}{ts}{date_iso_8601}{date_common_log}{host}{method}{uri}{version}{target}{hostname}{code}{phrase}{error}{req_header_*}{res_header_*}{req_headers}{res_headers}{req_body}{res_body}';
-    const CLF = "{hostname} {req_header_User-Agent} - [{date_common_log}] \"{method} {target} HTTP/{version}\" {code} {res_header_Content-Length}";
+    const FULL = '{request}{response}{ts}{date_iso_8601}{date_common_log}{dest_host}{dest_method}{dest_uri}{dest_version}{target}{hostname}{code}{phrase}{error}{req_header_*}{res_header_*}{req_headers}{res_headers}{req_body}{res_body}';
+    const CLF = "{hostname} {req_header_User-Agent} - [{date_common_log}] \"{dest_method} {target} HTTP/{dest_version}\" {code} {res_header_Content-Length}";
     const DEBUG = ">>>>>>>>\n{request}\n<<<<<<<<\n{response}\n--------\n{error}";
-    const SHORT = '[{ts}] "{method} {target} HTTP/{version}" {code}';
+    const SHORT = '[{ts}] "{dest_method} {target} HTTP/{dest_version}" {code}';
     /** @var string Template used to format log messages */
     private $template;
     /**
      * @param string $template Log message template
      */
-    public function __construct($template = self::CLF)
+    public function __construct($template = self::FULL)
     {
-        $this->template = $template ?: self::CLF;
+        $this->template = $template ?: self::FULL;
     }
     /**
      * Returns a formatted message string.
@@ -91,7 +91,7 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
                             'Protocol-Host' => $request->getUri()->getHost(),
                             'Protocol-Port' => $request->getUri()->getPort() ? $request->getUri()->getPort() : 80,
                             'Protocol-Request-Target' => $request->getRequestTarget()
-                            ],
+                        ],
                             $this->headers($request)
                         )
                         ;
@@ -122,13 +122,13 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
                     case 'date_common_log':
                         $result = date('d/M/Y:H:i:s O');
                         break;
-                    case 'method':
+                    case 'dest_method':
                         $result = $request->getMethod();
                         break;
-                    case 'version':
+                    case 'dest_version':
                         $result = $request->getProtocolVersion();
                         break;
-                    case 'uri':
+                    case 'dest_uri':
                     case 'url':
                         $result = $request->getUri()->__toString();
                         break;
@@ -143,7 +143,7 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
                             ? $response->getProtocolVersion()
                             : 'NULL';
                         break;
-                    case 'host':
+                    case 'dest_host':
                         $result = $request->getHeaderLine('Host');
                         break;
                     case 'hostname':
