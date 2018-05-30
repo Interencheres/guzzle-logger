@@ -10,6 +10,7 @@ namespace Interencheres;
 
 use \Exception;
 use GuzzleHttp\Psr7;
+use Monolog\Logger;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -50,10 +51,13 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
     private $template;
     /**
      * @param string $template Log message template
+     * @param array $contextArray channel & LogLevel
      */
-    public function __construct($template = self::FULL)
+    public function __construct($template = self::FULL, array $contextArray)
     {
         $this->template = $template ?: self::FULL;
+        $this->extraInfo = $contextArray;
+
     }
     /**
      * Returns a formatted message string.
@@ -69,7 +73,12 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
         ResponseInterface $response = null,
         Exception $error = null
     ) {
+        $dateRequest = new DateTime();
         $cache = [];
+
+        $cache['@datetime'] = $dateRequest->format('Y-m-d\TH:i:s\Z');
+        $cache['channel'] = $this->extraInfo['channel'];
+
         preg_replace_callback(
             '/{\s*([A-Za-z_\-\.0-9]+)\s*}/',
             function (array $matches) use ($request, $response, $error, &$cache) {
