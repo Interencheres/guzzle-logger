@@ -11,7 +11,6 @@ namespace Interencheres;
 use \DateTime;
 use \Exception;
 use GuzzleHttp\Psr7;
-use Monolog\Logger;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -59,7 +58,6 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
     {
         $this->template = $template ?: self::FULL;
         $this->extraInfo = $contextArray;
-
     }
     /**
      * Returns a formatted message string.
