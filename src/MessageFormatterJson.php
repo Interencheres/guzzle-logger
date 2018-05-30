@@ -76,7 +76,6 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
     ) {
         $dateRequest = new DateTime();
         $cache = [];
-
         $cache['@datetime'] = $dateRequest->format('Y-m-d\TH:i:s\Z');
         $cache['channel'] = $this->extraInfo['channel'];
 
