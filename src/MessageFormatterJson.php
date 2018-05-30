@@ -50,6 +50,7 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
     const SHORT = '[{ts}] "{dest_method} {target} HTTP/{dest_version}" {code}';
     /** @var string Template used to format log messages */
     private $template;
+    private $extraInfo;
     /**
      * @param string $template Log message template
      * @param array $contextArray channel & LogLevel
