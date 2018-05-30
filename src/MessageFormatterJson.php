@@ -8,7 +8,7 @@
 
 namespace Interencheres;
 
-use DateTime;
+use \DateTime;
 use \Exception;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\MessageInterface;
