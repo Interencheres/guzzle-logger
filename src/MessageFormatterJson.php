@@ -11,6 +11,7 @@ namespace Interencheres;
 use \DateTime;
 use \Exception;
 use GuzzleHttp\Psr7;
+use Monolog\Logger;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -75,10 +76,8 @@ class MessageFormatterJson extends \GuzzleHttp\MessageFormatter
     ) {
         $dateRequest = new DateTime();
         $cache = [];
-        
         $cache['@datetime'] = $dateRequest->format('Y-m-d\TH:i:s\Z');
         $cache['channel'] = $this->extraInfo['channel'];
-        $cache['loglevel'] = $this->extraInfo['loglevel'];
 
         preg_replace_callback(
             '/{\s*([A-Za-z_\-\.0-9]+)\s*}/',
